@@ -89,6 +89,12 @@ sudo mount -t cifs //192.168.10.156/usbshare1/jellyfin/Radarr /mnt/jellyfin/Rada
 sudo mount -t cifs //192.168.10.156/usbshare1/jellyfin/Lidarr /mnt/jellyfin/Lidarr -o credentials=/etc/smbcredentials,vers=2.1,rw,uid=1000,gid=1000
 ```
 
+### Se connecter à Bitorrent :
+```bash
+docker logs qbittorrent 2>&1 | grep "WebUI administrator"
+```
+
+---
 > 💡 À automatiser dans `/etc/fstab` si nécessaire.
 
 ---
