@@ -79,7 +79,7 @@ docker compose down
 Contenu :
 ```
 username=jonathan
-password=J0n@thandu07beestation
+password=habituel
 ```
 
 ### Commandes de montage :
