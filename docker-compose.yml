@@ -1,0 +1,92 @@
+version: '3.3'
+
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /home/jonathan/sonarr/config:/config
+      - /mnt/jellyfin/Sonarr:/tv
+      - /mnt/jellyfin:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /home/jonathan/radarr/config:/config
+      - /mnt/jellyfin/Radarr:/movies
+      - /mnt/jellyfin:/downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
+  lidarr:
+    image: lscr.io/linuxserver/lidarr
+    container_name: lidarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /home/jonathan/lidarr/config:/config
+      - /mnt/jellyfin/Lidarr:/music
+      - /mnt/jellyfin:/downloads
+    ports:
+      - 8686:8686
+    restart: unless-stopped
+
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /home/jonathan/jellyfin/config:/config
+      - /mnt/jellyfin/Sonarr:/data/tvshows
+      - /mnt/jellyfin/Radarr:/data/movies
+      - /mnt/jellyfin/Lidarr:/data/music
+    ports:
+      - 8096:8096
+    restart: unless-stopped
+
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - WEBUI_PORT=8080
+    volumes:
+      - /home/jonathan/qbittorrent/config:/config
+      - /mnt/jellyfin:/downloads
+    ports:
+      - 8080:8080
+    restart: unless-stopped
+
+  jackett:
+    image: lscr.io/linuxserver/jackett
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+    volumes:
+      - /home/jonathan/jackett/config:/config
+      - /home/jonathan/jackett/downloads:/downloads
+    ports:
+      - 9117:9117
+    restart: unless-stopped
