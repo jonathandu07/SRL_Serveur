@@ -20,11 +20,11 @@ Hébergé sur un PC ASUS sous **Zorin OS 17.3**, avec montages réseau vers un N
 ## 🔐 Connexion SSH à la machine Zorin OS (ASUS-YHWH)
 
 ### 📍 Adresse IP locale :
-`192.168.10.202`
+`192.168.10.138`
 
 ### ✅ Connexion SSH :
 ```bash
-ssh jonathan@192.168.10.202
+ssh jonathan@192.168.10.138
 ```
 
 ### 🧠 Mot de passe :
@@ -101,7 +101,7 @@ docker logs qbittorrent 2>&1 | grep "WebUI administrator"
 
 ## 🧠 Notes supplémentaires
 
-- Sonarr/Radarr/Lidarr doivent être liés à **qBittorrent** (`http://192.168.10.202:8080`) pour lancer les téléchargements.
+- Sonarr/Radarr/Lidarr doivent être liés à **qBittorrent** (`http://192.168.10.138:8080`) pour lancer les téléchargements.
 - **Jackett** permet d’ajouter des indexeurs manuellement à Sonarr/Radarr.
 - Jellyfin détecte automatiquement les fichiers une fois organisés dans `/data/tvshows`, `/data/movies`, `/data/music`.
 
