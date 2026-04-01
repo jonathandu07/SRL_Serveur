@@ -1,6 +1,6 @@
 services:
   sonarr:
-    image: lscr.io/linuxserver/sonarr
+    image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
       - PUID=1000
@@ -9,14 +9,14 @@ services:
     volumes:
       - /home/jonathan/sonarr/config:/config
       - /mnt/jellyfin/Sonarr:/tv
-      - /mnt/jellyfin:/downloads
-      - /mnt/win-share:/win-share       # <-- ajout du partage Windows
+      - /mnt/jellyfin/downloads:/downloads
+      - /mnt/win-share:/win-share
     ports:
       - 8989:8989
     restart: unless-stopped
 
   radarr:
-    image: lscr.io/linuxserver/radarr
+    image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
       - PUID=1000
@@ -25,14 +25,14 @@ services:
     volumes:
       - /home/jonathan/radarr/config:/config
       - /mnt/jellyfin/Radarr:/movies
-      - /mnt/jellyfin:/downloads
-      - /mnt/win-share:/win-share       # <-- ajout du partage Windows
+      - /mnt/jellyfin/downloads:/downloads
+      - /mnt/win-share:/win-share
     ports:
       - 7878:7878
     restart: unless-stopped
 
   lidarr:
-    image: lscr.io/linuxserver/lidarr
+    image: lscr.io/linuxserver/lidarr:latest
     container_name: lidarr
     environment:
       - PUID=1000
@@ -41,31 +41,31 @@ services:
     volumes:
       - /home/jonathan/lidarr/config:/config
       - /mnt/jellyfin/Lidarr:/music
-      - /mnt/jellyfin:/downloads
-      - /mnt/win-share:/win-share       # <-- ajout du partage Windows
+      - /mnt/jellyfin/downloads:/downloads
+      - /mnt/win-share:/win-share
     ports:
       - 8686:8686
     restart: unless-stopped
 
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:10.11
     container_name: jellyfin
+    user: "1000:1000"
     environment:
-      - PUID=1000
-      - PGID=1000
       - TZ=Europe/Paris
     volumes:
       - /home/jonathan/jellyfin/config:/config
+      - /home/jonathan/jellyfin/cache:/cache
       - /mnt/jellyfin/Sonarr:/data/tvshows
       - /mnt/jellyfin/Radarr:/data/movies
       - /mnt/jellyfin/Lidarr:/data/music
-      - /mnt/win-share:/data/win-share   # <-- ajout du partage Windows
+      - /mnt/win-share:/data/win-share
     ports:
       - 8096:8096
     restart: unless-stopped
 
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent
+    image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
       - PUID=1000
@@ -74,14 +74,14 @@ services:
       - WEBUI_PORT=8080
     volumes:
       - /home/jonathan/qbittorrent/config:/config
-      - /mnt/jellyfin:/downloads
-      - /mnt/win-share:/win-share        # <-- ajout du partage Windows
+      - /mnt/jellyfin/downloads:/downloads
+      - /mnt/win-share:/win-share
     ports:
       - 8080:8080
     restart: unless-stopped
 
   jackett:
-    image: lscr.io/linuxserver/jackett
+    image: lscr.io/linuxserver/jackett:latest
     container_name: jackett
     environment:
       - PUID=1000
@@ -90,7 +90,7 @@ services:
     volumes:
       - /home/jonathan/jackett/config:/config
       - /home/jonathan/jackett/downloads:/downloads
-      - /mnt/win-share:/win-share        # <-- ajout du partage Windows
+      - /mnt/win-share:/win-share
     ports:
       - 9117:9117
     restart: unless-stopped
