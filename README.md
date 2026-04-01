@@ -94,6 +94,7 @@ sudo mount -t cifs //192.168.10.156/usbshare1/jellyfin/Lidarr /mnt/jellyfin/Lida
 docker logs qbittorrent 2>&1 | grep "WebUI administrator"
 ```
 
+- **Mot de passe oublié Bitorrent :** `docker logs qbittorrent 2>&1 | grep -i "temporary password"`
 ---
 > 💡 À automatiser dans `/etc/fstab` si nécessaire.
 
